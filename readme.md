@@ -50,7 +50,7 @@ Grains are stored in json format with the following convention for blob names:
 i.e.
 
 ```
-Grain1-0.json
+GrainCollection1.Grain1-0.json
 ```
 
 ## License
