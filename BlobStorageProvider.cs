@@ -1,13 +1,14 @@
-﻿using Microsoft.WindowsAzure.Storage;
-using Microsoft.WindowsAzure.Storage.Blob;
-using Orleans;
-using Orleans.Storage;
-using System;
-using System.Threading.Tasks;
-using System.Web.Script.Serialization;
-
-namespace OrleansBlobStorageProvider
+﻿namespace OrleansBlobStorageProvider
 {
+    using System;
+    using System.Threading.Tasks;
+    using System.Web.Script.Serialization;
+
+    using Microsoft.WindowsAzure.Storage;
+    using Microsoft.WindowsAzure.Storage.Blob;
+    
+    using Orleans;
+    using Orleans.Storage;
 
     public class BlobStorageProvider : IStorageProvider
     {
@@ -31,7 +32,6 @@ namespace OrleansBlobStorageProvider
             {
                 Log.Error(0, ex.ToString());
             }
-
         }
 
         public Task Close()
@@ -97,5 +97,4 @@ namespace OrleansBlobStorageProvider
             }
         }
     }
-
 }
