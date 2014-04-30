@@ -2,23 +2,22 @@
 {
     using System;
     using System.Threading.Tasks;
-    using System.Web.Script.Serialization;
-
     using Microsoft.WindowsAzure.Storage;
     using Microsoft.WindowsAzure.Storage.Blob;
-    
     using Orleans;
+    using Orleans.Providers;
     using Orleans.Storage;
+    using Newtonsoft.Json;    
 
     public class BlobStorageProvider : IStorageProvider
     {
-        CloudBlobContainer container;
+        private CloudBlobContainer container;
 
         public OrleansLogger Log { get; set; }
 
         public string Name { get; set; }
 
-        public async Task Init(string name, Orleans.Providers.IProviderRuntime providerRuntime, Orleans.Providers.IProviderConfiguration config)
+        public async Task Init(string name, IProviderRuntime providerRuntime, IProviderConfiguration config)
         {
             try
             {
@@ -43,19 +42,21 @@
         {
             try
             {
-                var blobName = GetBlobName(grainType, grainId);
+                var blobName = BlobStorageProvider.GetBlobName(grainType, grainId);
                 var blob = container.GetBlockBlobReference(blobName);
                 var text = await blob.DownloadTextAsync();
                 if (string.IsNullOrWhiteSpace(text))
                 {
-                    var data = new JavaScriptSerializer().Deserialize(text, grainState.GetType());
-                    var dict = ((IGrainState)data).AsDictionary();
-                    grainState.SetAll(dict);
+                    return;
                 }
-            }
-            catch (StorageException)
-            {
 
+                var data = JsonConvert.DeserializeObject(text, grainState.GetType());
+                var dict = ((IGrainState)data).AsDictionary();
+                grainState.SetAll(dict);
+            }
+            catch (StorageException ex)
+            {
+                ;
             }
             catch (Exception ex)
             {
@@ -72,8 +73,8 @@
         {
             try
             {
-                var blobName = GetBlobName(grainType, grainId);
-                var storedData = new JavaScriptSerializer().Serialize(grainState.AsDictionary());
+                var blobName = BlobStorageProvider.GetBlobName(grainType, grainId);
+                var storedData = JsonConvert.SerializeObject(grainState.AsDictionary());
                 var blob = container.GetBlockBlobReference(blobName);
                 await blob.UploadTextAsync(storedData);
             }
@@ -87,7 +88,7 @@
         {
             try
             {
-                var blobName = GetBlobName(grainType, grainId);
+                var blobName = BlobStorageProvider.GetBlobName(grainType, grainId);
                 var blob = container.GetBlockBlobReference(blobName);
                 await blob.DeleteIfExistsAsync();
             }
