@@ -11,6 +11,11 @@
 
     public class BlobStorageProvider : IStorageProvider
     {
+        private JsonSerializerSettings settings = new JsonSerializerSettings
+        {
+            ContractResolver = new GrainReferenceAwareContractResolver()
+        };
+
         private CloudBlobContainer container;
 
         public OrleansLogger Log { get; set; }
@@ -50,7 +55,7 @@
                     return;
                 }
 
-                var data = JsonConvert.DeserializeObject(text, grainState.GetType());
+                var data = JsonConvert.DeserializeObject(text, grainState.GetType(), this.settings);
                 var dict = ((IGrainState)data).AsDictionary();
                 grainState.SetAll(dict);
             }
@@ -74,7 +79,7 @@
             try
             {
                 var blobName = BlobStorageProvider.GetBlobName(grainType, grainId);
-                var storedData = JsonConvert.SerializeObject(grainState.AsDictionary());
+                var storedData = JsonConvert.SerializeObject(grainState.AsDictionary(), this.settings);
                 var blob = container.GetBlockBlobReference(blobName);
                 await blob.UploadTextAsync(storedData);
             }
