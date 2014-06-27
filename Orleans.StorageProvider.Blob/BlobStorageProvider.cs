@@ -49,19 +49,22 @@
             {
                 var blobName = BlobStorageProvider.GetBlobName(grainType, grainId);
                 var blob = container.GetBlockBlobReference(blobName);
+
+                var exists = await blob.ExistsAsync();
+                if (!exists)
+                {
+                    return;
+                }
+
                 var text = await blob.DownloadTextAsync();
                 if (string.IsNullOrWhiteSpace(text))
                 {
                     return;
                 }
 
-                var data = JsonConvert.DeserializeObject(text, grainState.GetType(), this.settings);
+                var data = JsonConvert.DeserializeObject(text, grainState.GetType(), settings);
                 var dict = ((IGrainState)data).AsDictionary();
                 grainState.SetAll(dict);
-            }
-            catch (StorageException ex)
-            {
-                ;
             }
             catch (Exception ex)
             {
@@ -79,7 +82,7 @@
             try
             {
                 var blobName = BlobStorageProvider.GetBlobName(grainType, grainId);
-                var storedData = JsonConvert.SerializeObject(grainState.AsDictionary(), this.settings);
+                var storedData = JsonConvert.SerializeObject(grainState.AsDictionary(), settings);
                 var blob = container.GetBlockBlobReference(blobName);
                 await blob.UploadTextAsync(storedData);
             }
