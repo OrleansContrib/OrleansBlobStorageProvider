@@ -1,3 +1,7 @@
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using FluentAssertions;
 using NUnit.Framework;
 using Orleans.StorageProvider.Blob.TestGrains;
 using Orleans.StorageProvider.Blob.TestInterfaces;
@@ -8,7 +12,7 @@ namespace Orleans.StorageProvider.Blob.Tests
     [TestFixture]
     public class GrainWithExtendedKey
     {
-        private const string EmailId = "EmailState/0000000000000000000000000000000106ffffffc4b12014+asdf@gmail.bs";
+        private const string EmailId = "Orleans.StorageProvider.Blob.TestGrains.Email-0000000000000000000000000000000106ffffffa4de1a69+asdf@gmail.bs.json";
 
         private BlobSetup blobSetup;
         private SiloSetup siloSetup;
@@ -33,12 +37,44 @@ namespace Orleans.StorageProvider.Blob.Tests
             var email = EmailFactory.GetGrain(1, "asdf@gmail.bs");
             await email.Send();
 
-            //IAsyncDocumentSession session = this.blobSetup.NewAsyncSession();
-            //var actualStored = await session.LoadAsync<IEmailState>(EmailId);
+            var actualStored = await this.blobSetup.LoadAsync<DummyEmailState>(EmailId);
 
-            //actualStored.Email.Should().Be("asdf@gmail.bs");
-            //actualStored.SentAt.Should().HaveValue();
-            //actualStored.Person.Should().BeNull();
+            actualStored.Email.Should().Be("asdf@gmail.bs");
+            actualStored.SentAt.Should().HaveValue();
+            actualStored.Person.Should().BeNull();
+        }
+
+        private class DummyEmailState : IEmailState
+        {
+            public Task ClearStateAsync()
+            {
+                throw new NotImplementedException();
+            }
+
+            public Task WriteStateAsync()
+            {
+                throw new NotImplementedException();
+            }
+
+            public Task ReadStateAsync()
+            {
+                throw new NotImplementedException();
+            }
+
+            public Dictionary<string, object> AsDictionary()
+            {
+                throw new NotImplementedException();
+            }
+
+            public void SetAll(Dictionary<string, object> values)
+            {
+                throw new NotImplementedException();
+            }
+
+            public string Etag { get; set; }
+            public string Email { get; set; }
+            public DateTimeOffset? SentAt { get; set; }
+            public IPerson Person { get; set; }
         }
     }
 }

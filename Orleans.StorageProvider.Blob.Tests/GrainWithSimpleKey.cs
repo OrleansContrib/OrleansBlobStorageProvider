@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using FluentAssertions;
 using NUnit.Framework;
 using Orleans.StorageProvider.Blob.TestGrains;
@@ -9,7 +11,7 @@ namespace Orleans.StorageProvider.Blob.Tests
     [TestFixture]
     public class GrainWithSimpleKey
     {
-        private const string PersonId = "PersonState/0000000000000000000000000000000103ffffffd411bc7a";
+        private const string PersonId = "Orleans.StorageProvider.Blob.TestGrains.Person-00000000000000000000000000000001030000001155e6ee.json";
 
         private BlobSetup blobSetup;
         private SiloSetup siloSetup;
@@ -45,11 +47,44 @@ namespace Orleans.StorageProvider.Blob.Tests
                 Gender = await result.Gender
             };
 
-            //IAsyncDocumentSession session = this.blobSetup.NewAsyncSession();
-            //var actualStored = await session.LoadAsync<IPersonState>(PersonId);
+            var actualStored = await this.blobSetup.LoadAsync<DummyPersonState>(PersonId);
 
-            //actual.ShouldBeEquivalentTo(expected);
-            //actualStored.ShouldBeEquivalentTo(expected, options => options.ExcludingMissingProperties());
+            actual.ShouldBeEquivalentTo(expected);
+            actualStored.ShouldBeEquivalentTo(expected, options => options.ExcludingMissingProperties());
+        }
+
+        private class DummyPersonState : IPersonState
+        {
+            public Task ClearStateAsync()
+            {
+                throw new System.NotImplementedException();
+            }
+
+            public Task WriteStateAsync()
+            {
+                throw new System.NotImplementedException();
+            }
+
+            public Task ReadStateAsync()
+            {
+                throw new System.NotImplementedException();
+            }
+
+            public Dictionary<string, object> AsDictionary()
+            {
+                throw new System.NotImplementedException();
+            }
+
+            public void SetAll(Dictionary<string, object> values)
+            {
+                throw new System.NotImplementedException();
+            }
+
+            public string Etag { get; set; }
+            public string FirstName { get; set; }
+            public string LastName { get; set; }
+            public GenderType Gender { get; set; }
+            public int Age { get; set; }
         }
     }
 }
