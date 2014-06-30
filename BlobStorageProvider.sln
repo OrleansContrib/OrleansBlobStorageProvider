@@ -1,9 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.21005.1
+VisualStudioVersion = 12.0.30501.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrleansBlobStorageProvider", "OrleansBlobStorageProvider.csproj", "{944568EA-BC0B-49BC-AF0F-B4A4A62858AC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrleansBlobStorageProvider", "Orleans.StorageProvider.Blob\OrleansBlobStorageProvider.csproj", "{944568EA-BC0B-49BC-AF0F-B4A4A62858AC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Orleans.StorageProvider.Blob.TestGrains", "Orleans.StorageProvider.Blob.TestGrains\Orleans.StorageProvider.Blob.TestGrains.csproj", "{175FE268-122D-49E4-ADA8-3225DA386F48}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Orleans.StorageProvider.Blob.TestInterfaces", "Orleans.StorageProvider.Blob.TestInterfaces\Orleans.StorageProvider.Blob.TestInterfaces.csproj", "{10D5D2A7-3D34-4ED8-8C45-54D29C2559B6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Orleans.StorageProvider.Blob.Tests", "Orleans.StorageProvider.Blob.Tests\Orleans.StorageProvider.Blob.Tests.csproj", "{0B27AEAC-1722-440E-9E1C-107DA22DC493}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +21,18 @@ Global
 		{944568EA-BC0B-49BC-AF0F-B4A4A62858AC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{944568EA-BC0B-49BC-AF0F-B4A4A62858AC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{944568EA-BC0B-49BC-AF0F-B4A4A62858AC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{175FE268-122D-49E4-ADA8-3225DA386F48}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{175FE268-122D-49E4-ADA8-3225DA386F48}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{175FE268-122D-49E4-ADA8-3225DA386F48}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{175FE268-122D-49E4-ADA8-3225DA386F48}.Release|Any CPU.Build.0 = Release|Any CPU
+		{10D5D2A7-3D34-4ED8-8C45-54D29C2559B6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{10D5D2A7-3D34-4ED8-8C45-54D29C2559B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{10D5D2A7-3D34-4ED8-8C45-54D29C2559B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{10D5D2A7-3D34-4ED8-8C45-54D29C2559B6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0B27AEAC-1722-440E-9E1C-107DA22DC493}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0B27AEAC-1722-440E-9E1C-107DA22DC493}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0B27AEAC-1722-440E-9E1C-107DA22DC493}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0B27AEAC-1722-440E-9E1C-107DA22DC493}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
