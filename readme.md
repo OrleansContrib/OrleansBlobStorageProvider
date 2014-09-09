@@ -23,7 +23,7 @@ Then register the provider in your Silo Configuration:
 <OrleansConfiguration xmlns="urn:orleans">
   <Globals>
     <StorageProviders>
-      <Provider Type="Orleans.Storagerovider.Blob.BlobStorageProvider" Name="BlobStore" DataConnectionString="UseDevelopmentStorage=true" ContainerName="grainstate"/>
+      <Provider Type="Orleans.StorageProvider.Blob.BlobStorageProvider" Name="BlobStore" DataConnectionString="UseDevelopmentStorage=true" ContainerName="grainstate"/>
     </StorageProviders>
     ...
 ```
