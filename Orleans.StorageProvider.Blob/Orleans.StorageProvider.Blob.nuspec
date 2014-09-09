@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>$id$</id>
+    <version>$version$</version>
+    <title>$title$</title>
+    <authors>$author$</authors>
+    <owners>$author$</owners>
+    <licenseUrl>http://opensource.org/licenses/MIT</licenseUrl>
+    <projectUrl>https://github.com/OrleansContrib/OrleansBlobStorageProvider</projectUrl>
+    <iconUrl>https://avatars0.githubusercontent.com/u/7149163?v=2</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>$description$</description>
+    <releaseNotes>Upgraded to SDK 0.9</releaseNotes>
+    <copyright>Copyright 2014</copyright>
+    <tags>Orleans Azure Blob Storage Provider</tags>
+  </metadata>
+</package>

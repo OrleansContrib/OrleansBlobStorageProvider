@@ -1,14 +1,13 @@
 ﻿using System.Reflection;
-using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("BlobStorageProvider")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("Orlean Blob Storage Provider")]
+[assembly: AssemblyDescription("An Orleans grain state provider which persists state in JSON format in Azure Blob Storage")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("Richard Astbury")]
 [assembly: AssemblyProduct("BlobStorageProvider")]
 [assembly: AssemblyCopyright("Copyright ©  2014")]
 [assembly: AssemblyTrademark("")]

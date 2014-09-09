@@ -10,7 +10,13 @@ The `April_14` branch targets the initial release.
 
 The Orleans SDK must be installed first.
 
-Build the project. This will copy OrleansBlobStorageProvider.dll and required reference to the Orleans SDK directory.
+Using NuGet, with the GrainClasses (or Silo Host) project as your target:
+
+```
+Install-Package Orleans.StorageProvider.Blob
+```
+
+Then register the provider in your Silo Configuration:
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
