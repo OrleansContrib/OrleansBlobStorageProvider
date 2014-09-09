@@ -17,7 +17,7 @@ namespace Orleans.StorageProvider.Blob.Tests.Infrastructure
             var account = CloudStorageAccount.Parse("UseDevelopmentStorage=true");
             var blobClient = account.CreateCloudBlobClient();
             this.container = blobClient.GetContainerReference("grainstate");
-            this.container.CreateIfNotExists();
+            //this.container.CreateIfNotExists();
         }
 
         public async Task<T> LoadAsync<T>(string grainId)

@@ -1,13 +1,13 @@
 ﻿namespace OrleansBlobStorageProvider
 {
-    using System;
-    using System.Threading.Tasks;
     using Microsoft.WindowsAzure.Storage;
     using Microsoft.WindowsAzure.Storage.Blob;
+    using Newtonsoft.Json;
     using Orleans;
     using Orleans.Providers;
     using Orleans.Storage;
-    using Newtonsoft.Json;    
+    using System;
+    using System.Threading.Tasks;
 
     public class BlobStorageProvider : IStorageProvider
     {
@@ -74,7 +74,7 @@
 
         private static string GetBlobName(string grainType, GrainReference grainId)
         {
-            return string.Format("{0}-{1}.json", grainType, grainId.ToKeyString()); ;
+            return string.Format("{0}-{1}.json", grainType, grainId.ToKeyString());
         }
 
         public async Task WriteStateAsync(string grainType, GrainReference grainId, IGrainState grainState)
