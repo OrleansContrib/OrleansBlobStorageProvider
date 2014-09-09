@@ -13,7 +13,7 @@ Build the project. This will copy OrleansBlobStorageProvider.dll and required re
 <OrleansConfiguration xmlns="urn:orleans">
   <Globals>
     <StorageProviders>
-      <Provider Type="OrleansBlobStorageProvider.BlobStorageProvider" Name="BlobStore" DataConnectionString="UseDevelopmentStorage=true" ContainerName="grainstate"/>
+      <Provider Type="Orleans.Storagerovider.Blob.BlobStorageProvider" Name="BlobStore" DataConnectionString="UseDevelopmentStorage=true" ContainerName="grainstate"/>
     </StorageProviders>
     ...
 ```
@@ -29,7 +29,7 @@ public interface IMyGrainState : IGrainState
 
 // Select the BlobStore as the storage provider for the grain
 [StorageProvider(ProviderName="BlobStore")]
-public class Grain1 : Orleans.GrainBase<IMyGrainState>, IGrain1
+public class Grain1 : Orleans.Grain<IMyGrainState>, IGrain1
 {
     public Task Test(string value)
     {
