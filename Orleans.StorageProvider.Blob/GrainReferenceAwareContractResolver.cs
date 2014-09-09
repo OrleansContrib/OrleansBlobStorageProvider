@@ -1,10 +1,11 @@
-﻿namespace OrleansBlobStorageProvider
+﻿namespace Orleans.Storagerovider.Blob
 {
     using System;
     using System.Reflection;
     using Newtonsoft.Json;
     using Newtonsoft.Json.Serialization;
     using Orleans;
+    using Orleans.Runtime;
 
     internal class GrainReferenceAwareContractResolver : DefaultContractResolver
     {

@@ -5,14 +5,13 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{175FE268-122D-49E4-ADA8-3225DA386F48}</ProjectGuid>
+    <ProjectGuid>{3F2731C9-4A21-428B-9ABA-9D96E221B5C5}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Orleans.StorageProvider.Blob.TestGrains</RootNamespace>
-    <AssemblyName>Orleans.StorageProvider.Blob.TestGrains</AssemblyName>
+    <RootNamespace>Orleans.StorageProvider.Blob.Test.GrainClasses</RootNamespace>
+    <AssemblyName>Orleans.StorageProvider.Blob.Test.GrainClasses</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <NuGetPackageImportStamp>ac1d625e</NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup>
     <StartAction>Program</StartAction>
@@ -50,16 +49,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Email.cs" />
-    <Compile Include="Person.cs" />
-    <Compile Include="IEmailState.cs" />
-    <Compile Include="IPersonState.cs" />
+    <Compile Include="Grain1.cs" />
+    <Compile Include="Properties\orleans.codegen.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Orleans.StorageProvider.Blob.TestInterfaces\Orleans.StorageProvider.Blob.TestInterfaces.csproj">
-      <Project>{10d5d2a7-3d34-4ed8-8c45-54d29c2559b6}</Project>
-      <Name>Orleans.StorageProvider.Blob.TestInterfaces</Name>
+    <ProjectReference Include="..\Orleans.StorageProvider.Blob.Test.GrainInterfaces\Orleans.StorageProvider.Blob.Test.GrainInterfaces.csproj">
+      <Project>{0d4c0d5a-364e-4142-9d8d-2ba2e6a0ba39}</Project>
+      <Name>Orleans.StorageProvider.Blob.Test.GrainInterfaces</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

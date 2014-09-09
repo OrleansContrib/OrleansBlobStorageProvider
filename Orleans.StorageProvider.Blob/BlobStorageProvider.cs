@@ -1,10 +1,12 @@
-﻿namespace OrleansBlobStorageProvider
+﻿namespace Orleans.Storagerovider.Blob
 {
     using Microsoft.WindowsAzure.Storage;
     using Microsoft.WindowsAzure.Storage.Blob;
     using Newtonsoft.Json;
     using Orleans;
+    using Orleans.CodeGeneration;
     using Orleans.Providers;
+    using Orleans.Runtime;
     using Orleans.Storage;
     using System;
     using System.Threading.Tasks;
@@ -92,7 +94,7 @@
             }
         }
 
-        public async Task ClearStateAsync(string grainType, GrainReference grainId, GrainState grainState)
+        public async Task ClearStateAsync(string grainType, GrainReference grainId, IGrainState grainState)
         {
             try
             {

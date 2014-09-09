@@ -7,8 +7,8 @@
     <ProjectGuid>{944568EA-BC0B-49BC-AF0F-B4A4A62858AC}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>OrleansBlobStorageProvider</RootNamespace>
-    <AssemblyName>OrleansBlobStorageProvider</AssemblyName>
+    <RootNamespace>Orleans.Storagerovider.Blob</RootNamespace>
+    <AssemblyName>Orleans.Storagerovider.Blob</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

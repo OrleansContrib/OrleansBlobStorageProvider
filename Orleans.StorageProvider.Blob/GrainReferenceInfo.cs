@@ -1,4 +1,4 @@
-﻿namespace OrleansBlobStorageProvider
+﻿namespace Orleans.Storagerovider.Blob
 {
     internal class GrainReferenceInfo
     {

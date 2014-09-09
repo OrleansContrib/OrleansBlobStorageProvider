@@ -1,9 +1,10 @@
-namespace OrleansBlobStorageProvider
+namespace Orleans.Storagerovider.Blob
 {
     using System;
     using Newtonsoft.Json;
     using Orleans;
     using Orleans.Serialization;
+    using Orleans.Runtime;
 
     internal class GrainReferenceConverter : JsonConverter
     {
