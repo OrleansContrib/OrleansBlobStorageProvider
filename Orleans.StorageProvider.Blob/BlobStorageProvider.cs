@@ -1,4 +1,6 @@
-﻿namespace Orleans.Storagerovider.Blob
+﻿using Orleans.Serialization.Newtonsoft.Json;
+
+namespace Orleans.Storagerovider.Blob
 {
     using Microsoft.WindowsAzure.Storage;
     using Microsoft.WindowsAzure.Storage.Blob;
@@ -13,10 +15,7 @@
 
     public class BlobStorageProvider : IStorageProvider
     {
-        private JsonSerializerSettings settings = new JsonSerializerSettings
-        {
-            ContractResolver = new GrainReferenceAwareContractResolver()
-        };
+        private JsonSerializerSettings settings = new JsonSerializerSettings().ConfigureContractResolver();
 
         private CloudBlobContainer container;
 
