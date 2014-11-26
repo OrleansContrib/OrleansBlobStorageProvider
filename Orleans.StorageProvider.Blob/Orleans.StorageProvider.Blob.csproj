@@ -51,10 +51,13 @@
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>packages\Newtonsoft.Json.6.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\packages\Newtonsoft.Json.6.0.6\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="Orleans">
       <HintPath>$(OrleansSDK)\Binaries\OrleansServer\Orleans.dll</HintPath>
+    </Reference>
+    <Reference Include="Orleans.Serialization.Newtonsoft.Json">
+      <HintPath>..\packages\Orleans.Serialization.Newtonsoft.Json.0.9.0\lib\net45\Orleans.Serialization.Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="OrleansProviderInterfaces">
       <HintPath>$(OrleansSDK)\Binaries\OrleansServer\OrleansProviderInterfaces.dll</HintPath>
@@ -77,9 +80,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BlobStorageProvider.cs" />
-    <Compile Include="GrainReferenceAwareContractResolver.cs" />
-    <Compile Include="GrainReferenceConverter.cs" />
-    <Compile Include="GrainReferenceInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
