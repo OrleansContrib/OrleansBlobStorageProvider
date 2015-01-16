@@ -1,6 +1,6 @@
 ﻿using Orleans.Serialization.Newtonsoft.Json;
 
-namespace Orleans.Storagerovider.Blob
+namespace Orleans.StorageProvider.Blob
 {
     using Microsoft.WindowsAzure.Storage;
     using Microsoft.WindowsAzure.Storage.Blob;
