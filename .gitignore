@@ -120,6 +120,7 @@ ClientBin/
 *.[Pp]ublish.xml
 *.pfx
 *.publishsettings
+orleans.codegen.cs
 
 # RIA/Silverlight projects
 Generated_Code/
