@@ -11,6 +11,7 @@ namespace Orleans.StorageProvider.Blob
     using Orleans.Runtime;
     using Orleans.Storage;
     using System;
+    using System.Text;
     using System.Threading.Tasks;
 
     public class BlobStorageProvider : IStorageProvider
@@ -66,6 +67,7 @@ namespace Orleans.StorageProvider.Blob
                 var data = JsonConvert.DeserializeObject(text, grainState.GetType(), settings);
                 var dict = ((IGrainState)data).AsDictionary();
                 grainState.SetAll(dict);
+                grainState.Etag = blob.Properties.ETag;
             }
             catch (Exception ex)
             {
@@ -85,7 +87,14 @@ namespace Orleans.StorageProvider.Blob
                 var blobName = BlobStorageProvider.GetBlobName(grainType, grainId);
                 var storedData = JsonConvert.SerializeObject(grainState.AsDictionary(), settings);
                 var blob = container.GetBlockBlobReference(blobName);
-                await blob.UploadTextAsync(storedData);
+                await
+                    blob.UploadTextAsync(
+                        storedData,
+                        Encoding.UTF8,
+                        AccessCondition.GenerateIfMatchCondition(grainState.Etag),
+                        null,
+                        null);
+                grainState.Etag = blob.Properties.ETag;
             }
             catch (Exception ex)
             {
@@ -99,7 +108,12 @@ namespace Orleans.StorageProvider.Blob
             {
                 var blobName = BlobStorageProvider.GetBlobName(grainType, grainId);
                 var blob = container.GetBlockBlobReference(blobName);
-                await blob.DeleteIfExistsAsync();
+                await
+                    blob.DeleteIfExistsAsync(
+                        DeleteSnapshotsOption.None,
+                        AccessCondition.GenerateIfMatchCondition(grainState.Etag),
+                        null,
+                        null);
             }
             catch (Exception ex)
             {
