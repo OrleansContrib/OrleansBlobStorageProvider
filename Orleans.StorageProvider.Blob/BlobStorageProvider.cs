@@ -114,6 +114,7 @@ namespace Orleans.StorageProvider.Blob
                         AccessCondition.GenerateIfMatchCondition(grainState.Etag),
                         null,
                         null);
+                grainState.Etag = blob.Properties.ETag;
             }
             catch (Exception ex)
             {
