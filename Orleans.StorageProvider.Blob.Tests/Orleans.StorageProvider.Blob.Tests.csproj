@@ -36,16 +36,19 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Orleans">
-      <HintPath>..\..\..\..\..\..\Microsoft Codename Orleans SDK v0.9\SDK\Binaries\OrleansServer\Orleans.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(OrleansSDK)\Binaries\OrleansServer\Orleans.dll</HintPath>
     </Reference>
-    <Reference Include="OrleansProviderInterfaces">
-      <HintPath>..\..\..\..\..\..\Microsoft Codename Orleans SDK v0.9\SDK\Binaries\OrleansServer\OrleansProviderInterfaces.dll</HintPath>
+    <Reference Include="OrleansAzureUtils">
+      <HintPath>$(OrleansSDK)\Binaries\OrleansServer\OrleansAzureUtils.dll</HintPath>
     </Reference>
     <Reference Include="OrleansProviders">
-      <HintPath>..\..\..\..\..\..\Microsoft Codename Orleans SDK v0.9\SDK\Binaries\OrleansServer\OrleansProviders.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(OrleansSDK)\Binaries\OrleansServer\OrleansProviders.dll</HintPath>
     </Reference>
     <Reference Include="OrleansRuntime">
-      <HintPath>..\..\..\..\..\..\Microsoft Codename Orleans SDK v0.9\SDK\Binaries\OrleansServer\OrleansRuntime.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(OrleansSDK)\Binaries\OrleansServer\OrleansRuntime.dll</HintPath>
     </Reference>
     <Reference Include="System" />
   </ItemGroup>

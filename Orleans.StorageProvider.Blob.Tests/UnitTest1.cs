@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Threading.Tasks;
-using Orleans.Host;
+using Orleans.Runtime.Host;
 using System.Diagnostics;
 using Orleans.StorageProvider.Blob.Test.GrainInterfaces;
 
@@ -30,17 +30,17 @@ namespace Orleans.StorageProvider.Blob.Tests
 
         // code to initialize and clean up an Orleans Silo
 
-        static OrleansSiloHost siloHost;
+        static SiloHost siloHost;
         static AppDomain hostDomain;
 
         static void InitSilo(string[] args)
         {
-            siloHost = new OrleansSiloHost("Primary");
+            siloHost = new SiloHost("Primary");
             siloHost.ConfigFileName = "DevTestServerConfiguration.xml";
             siloHost.DeploymentId = "1";
             siloHost.InitializeOrleansSilo();
             var ok = siloHost.StartOrleansSilo();
-            if (!ok) throw new SystemException(string.Format("Failed to start Orleans silo '{0}' as a {1} node.", siloHost.SiloName, siloHost.SiloType));
+            if (!ok) throw new SystemException(string.Format("Failed to start Orleans silo '{0}' as a {1} node.", siloHost.Name, siloHost.Type));
         }
 
         [ClassInitialize]
@@ -53,7 +53,7 @@ namespace Orleans.StorageProvider.Blob.Tests
                 ApplicationBase = AppDomain.CurrentDomain.SetupInformation.ApplicationBase,
             });
 
-            Orleans.OrleansClient.Initialize("DevTestClientConfiguration.xml");
+            GrainClient.Initialize("DevTestClientConfiguration.xml");
         }
 
         [ClassCleanup]
