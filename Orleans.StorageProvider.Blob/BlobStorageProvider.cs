@@ -9,7 +9,6 @@ namespace Orleans.StorageProvider.Blob
     using Orleans.Providers;
     using Orleans.Runtime;
     using Orleans.Storage;
-    using Orleans.Serialization.Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
     using System.Text;
@@ -54,7 +53,7 @@ namespace Orleans.StorageProvider.Blob
         private void ConfigureJsonSerializerSettings(IProviderConfiguration config)
         {
             // By default, use automatic type name handling, simple assembly names, and no JSON formatting
-            settings = new JsonSerializerSettings().ConfigureContractResolver();
+            settings = new JsonSerializerSettings();
             settings.TypeNameHandling = TypeNameHandling.Auto;
             settings.TypeNameAssemblyFormat = System.Runtime.Serialization.Formatters.FormatterAssemblyStyle.Simple;
             settings.Formatting = Formatting.None;
