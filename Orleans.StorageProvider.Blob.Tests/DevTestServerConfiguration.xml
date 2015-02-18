@@ -2,7 +2,7 @@
 <OrleansConfiguration xmlns="urn:orleans">
   <Globals>
     <StorageProviders>
-      <Provider Type="Orleans.Storagerovider.Blob.BlobStorageProvider" Name="JSON" DataConnectionString="UseDevelopmentStorage=true" />
+      <Provider Type="Orleans.StorageProvider.Blob.BlobStorageProvider" Name="JSON" DataConnectionString="UseDevelopmentStorage=true" />
     </StorageProviders>
     <SeedNode Address="localhost" Port="11111" />
   </Globals>
