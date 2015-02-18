@@ -1,5 +1,4 @@
-﻿using Orleans.Serialization.Newtonsoft.Json;
-
+﻿
 namespace Orleans.StorageProvider.Blob
 {
     using Microsoft.WindowsAzure.Storage;
@@ -10,8 +9,10 @@ namespace Orleans.StorageProvider.Blob
     using Orleans.Providers;
     using Orleans.Runtime;
     using Orleans.Storage;
+    using Orleans.Serialization.Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
+    using System.Text;
     using System.Threading.Tasks;
 
     public class BlobStorageProvider : IStorageProvider
@@ -116,8 +117,10 @@ namespace Orleans.StorageProvider.Blob
                     return;
                 }
 
-                var data = JsonConvert.DeserializeObject(text, typeof(IDictionary<string, object>), settings) as IDictionary<string, object>;
-                grainState.SetAll(data);
+                var data = JsonConvert.DeserializeObject(text, grainState.GetType(), settings);
+                var dict = ((IGrainState)data).AsDictionary();
+                grainState.SetAll(dict);
+                grainState.Etag = blob.Properties.ETag;
             }
             catch (Exception ex)
             {
@@ -140,7 +143,14 @@ namespace Orleans.StorageProvider.Blob
                 Log.Verbose("Serialized grain state is: {0}.", storedData);
 
                 var blob = container.GetBlockBlobReference(blobName);
-                await blob.UploadTextAsync(storedData);
+                await
+                    blob.UploadTextAsync(
+                        storedData,
+                        Encoding.UTF8,
+                        AccessCondition.GenerateIfMatchCondition(grainState.Etag),
+                        null,
+                        null);
+                grainState.Etag = blob.Properties.ETag;
             }
             catch (Exception ex)
             {
@@ -154,7 +164,13 @@ namespace Orleans.StorageProvider.Blob
             {
                 var blobName = BlobStorageProvider.GetBlobName(grainType, grainId);
                 var blob = container.GetBlockBlobReference(blobName);
-                await blob.DeleteIfExistsAsync();
+                await
+                    blob.DeleteIfExistsAsync(
+                        DeleteSnapshotsOption.None,
+                        AccessCondition.GenerateIfMatchCondition(grainState.Etag),
+                        null,
+                        null);
+                grainState.Etag = blob.Properties.ETag;
             }
             catch (Exception ex)
             {
