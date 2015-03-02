@@ -142,6 +142,7 @@ namespace Orleans.StorageProvider.Blob
                 Log.Verbose("Serialized grain state is: {0}.", storedData);
 
                 var blob = container.GetBlockBlobReference(blobName);
+                blob.Properties.ContentType = "application/json";
                 await
                     blob.UploadTextAsync(
                         storedData,
