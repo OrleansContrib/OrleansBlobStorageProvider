@@ -1,42 +1,40 @@
-﻿using Orleans.Providers;
-using Orleans.StorageProvider.Blob.Test.GrainInterfaces;
-using System;
-using System.Threading.Tasks;
-
-namespace Orleans.StorageProvider.Blob.Test.GrainClasses
+﻿namespace Orleans.StorageProvider.Blob.Test.GrainClasses
 {
+  using System;
+  using System.Threading.Tasks;
+  using GrainInterfaces;
+  using Providers;
 
-    public interface MyState : IGrainState
+  public class MyState : GrainState
+  {
+    public string StringValue { get; set; }
+    public int IntValue { get; set; }
+    public DateTime DateTimeValue { get; set; }
+    public Guid GuidValue { get; set; }
+    public IGrain1 GrainValue { get; set; }
+  }
+
+  [ StorageProvider( ProviderName = "JSON" ) ]
+  public class Grain1 : Grain< MyState >, IGrain1
+  {
+    public Task Set( string stringValue, int intValue, DateTime dateTimeValue, Guid guidValue, IGrain1 grainValue )
     {
-        string StringValue { get; set; }
-        int IntValue { get; set; }
-        DateTime DateTimeValue { get; set; }
-        Guid GuidValue { get; set; }
-        IGrain1 GrainValue { get; set; }
+      State.StringValue = stringValue;
+      State.IntValue = intValue;
+      State.DateTimeValue = dateTimeValue;
+      State.GuidValue = guidValue;
+      State.GrainValue = grainValue;
+      return WriteStateAsync();
     }
 
-    [StorageProvider(ProviderName = "JSON")]
-    public class Grain1 : Orleans.Grain<MyState>, IGrain1
+    public Task< Tuple< string, int, DateTime, Guid, IGrain1 > > Get()
     {
-        public Task Set(string stringValue, int intValue, DateTime dateTimeValue, Guid guidValue, IGrain1 grainValue)
-        {
-            this.State.StringValue = stringValue;
-            this.State.IntValue = intValue;
-            this.State.DateTimeValue = dateTimeValue;
-            this.State.GuidValue = guidValue;
-            this.State.GrainValue = grainValue;
-            return this.State.WriteStateAsync();
-        }
-
-        public Task<Tuple<string, int, DateTime, Guid, IGrain1>> Get()
-        {
-            return Task.FromResult(new Tuple<string, int, DateTime, Guid, IGrain1>(
-                this.State.StringValue,
-                this.State.IntValue,
-                this.State.DateTimeValue,
-                this.State.GuidValue,
-                this.State.GrainValue));
-
-        }
+      return Task.FromResult( new Tuple< string, int, DateTime, Guid, IGrain1 >(
+        State.StringValue,
+        State.IntValue,
+        State.DateTimeValue,
+        State.GuidValue,
+        State.GrainValue ) );
     }
+  }
 }
