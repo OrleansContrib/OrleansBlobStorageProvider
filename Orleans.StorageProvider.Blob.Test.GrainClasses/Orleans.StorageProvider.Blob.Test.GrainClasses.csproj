@@ -65,7 +65,6 @@
   <PropertyGroup>
     <OrleansProjectType>Server</OrleansProjectType>
   </PropertyGroup>
-  <Import Project="$(OrleansSDK)\Binaries\OrleansClient\Orleans.SDK.targets" />
   <PropertyGroup>
     <PostBuildEvent>
       if exist "$(OrleansSDK)\LocalSilo" (

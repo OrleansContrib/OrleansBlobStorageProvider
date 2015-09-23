@@ -54,7 +54,6 @@
   <PropertyGroup>
     <OrleansProjectType>Client</OrleansProjectType>
   </PropertyGroup>
-  <Import Project="$(OrleansSDK)\Binaries\OrleansClient\Orleans.SDK.targets" />
   <PropertyGroup>
     <PostBuildEvent>
     </PostBuildEvent>
