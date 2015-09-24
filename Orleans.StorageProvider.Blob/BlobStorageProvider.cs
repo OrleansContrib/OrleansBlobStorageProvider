@@ -23,12 +23,14 @@
 
     public async Task Init( string name, IProviderRuntime providerRuntime, IProviderConfiguration config )
     {
+      Log = providerRuntime.GetLogger( this.GetType().Name );
+
       try
       {
         ConfigureJsonSerializerSettings( config );
 
         if( !config.Properties.ContainsKey( "DataConnectionString" ) )
-        { 
+        {
           throw new BadProviderConfigException(
             "The DataConnectionString setting has not been configured in the cloud role. Please add a DataConnectionString setting with a valid Azure Storage connection string." );
         }
@@ -39,12 +41,12 @@
           var containerName = config.Properties.ContainsKey( "ContainerName" ) ? config.Properties[ "ContainerName" ] : "grainstate";
           container = blobClient.GetContainerReference( containerName );
           await container.CreateIfNotExistsAsync();
-          Log = providerRuntime.GetLogger( this.GetType().Name );
         }
       }
       catch( Exception ex )
       {
-        Log.Error( 0, ex.ToString() );
+        Log.Error( 0, ex.ToString(), ex );
+        throw;
       }
     }
 
