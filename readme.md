@@ -2,7 +2,7 @@
 
 Stores Orleans grain state in blob storage as Json.
 
-The `master` branch targets the September (0.9) Orleans SDK release.
+The `master` branch targets the latest release.
 
 The `April_14` branch targets the initial release.
 
