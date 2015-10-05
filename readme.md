@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/OrleansContrib/OrleansBlobStorageProvider.svg?branch=master)](https://travis-ci.org/OrleansContrib/OrleansBlobStorageProvider)
+
 # Orleans Blob Storage Provider
 
 Stores Orleans grain state in blob storage as Json.
