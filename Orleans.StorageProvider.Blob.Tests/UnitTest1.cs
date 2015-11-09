@@ -34,9 +34,10 @@
 
     private static void InitSilo( string[] args )
     {
-      siloHost = new SiloHost( "Primary" );
-      siloHost.ConfigFileName = "DevTestServerConfiguration.xml";
-      siloHost.DeploymentId = "1";
+      siloHost = new SiloHost( "Primary" ) {
+        ConfigFileName = "DevTestServerConfiguration.xml",
+        DeploymentId = "1"
+      };
       siloHost.InitializeOrleansSilo();
       var ok = siloHost.StartOrleansSilo();
       if( !ok )
