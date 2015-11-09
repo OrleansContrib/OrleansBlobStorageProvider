@@ -53,10 +53,11 @@
     private void ConfigureJsonSerializerSettings( IProviderConfiguration config )
     {
       // By default, use automatic type name handling, simple assembly names, and no JSON formatting
-      settings = new JsonSerializerSettings();
-      settings.TypeNameHandling = TypeNameHandling.Auto;
-      settings.TypeNameAssemblyFormat = FormatterAssemblyStyle.Simple;
-      settings.Formatting = Formatting.None;
+      settings = new JsonSerializerSettings {
+        TypeNameHandling = TypeNameHandling.Auto,
+        TypeNameAssemblyFormat = FormatterAssemblyStyle.Simple,
+        Formatting = Formatting.None
+      };
 
       if( config.Properties.ContainsKey( "SerializeTypeNames" ) )
       {
@@ -66,6 +67,17 @@
         if( serializeTypeNames )
         {
           settings.TypeNameHandling = TypeNameHandling.All;
+        }
+      }
+
+      if (config.Properties.ContainsKey("PreserveReferencesHandling"))
+      {
+        bool preserveReferencesHandling;
+        var preserveReferencesHandlingValue = config.Properties["PreserveReferencesHandling"];
+        bool.TryParse(preserveReferencesHandlingValue, out preserveReferencesHandling);
+        if (preserveReferencesHandling)
+        {
+          settings.PreserveReferencesHandling = PreserveReferencesHandling.Objects;
         }
       }
 
