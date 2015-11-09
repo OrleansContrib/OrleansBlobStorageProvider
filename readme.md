@@ -28,6 +28,9 @@ Then register the provider in your Silo Configuration:
     ...
 ```
 
+Optional Attributes that can be added to the provider element
+* PreserveReferencesHandling="true" - Preserves reference handling for objects during Json serialization
+
 Then from your grain code configure grain storage:
 
 ```cs
