@@ -46,7 +46,7 @@
       }
 
       siloHost = new SiloHost( "Primary" ) {
-        ConfigFileName = "DevTestServerConfiguration.xml",
+        ConfigFileName = SILO_SETTINGS_FILE,
         DeploymentId = "1"
       };
       siloHost.InitializeOrleansSilo();

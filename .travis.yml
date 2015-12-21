@@ -1,2 +1,2 @@
 language: csharp
-solution: BlobStorageProvider.sln
+solution: BlobStorageProvider-Travis.sln
