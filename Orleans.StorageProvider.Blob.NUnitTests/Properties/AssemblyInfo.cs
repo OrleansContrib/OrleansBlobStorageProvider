@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Orleans.BlobStorageProvider.Test.Tests")]
+[assembly: AssemblyTitle("Orleans.StorageProvider.Blob.NUnitTests")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Orleans.BlobStorageProvider.Test.Tests")]
-[assembly: AssemblyCopyright("Copyright ©  2014")]
+[assembly: AssemblyProduct("Orleans.StorageProvider.Blob.NUnitTests")]
+[assembly: AssemblyCopyright("Copyright ©  2015")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("ef913b14-e49a-4525-8e38-85179b2ed247")]
+[assembly: Guid("bcd4d3a5-7c4c-4b31-98fc-5e2175fed918")]
 
 // Version information for an assembly consists of the following four values:
 //

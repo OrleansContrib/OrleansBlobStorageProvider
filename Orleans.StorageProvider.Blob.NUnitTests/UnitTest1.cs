@@ -1,17 +1,17 @@
-﻿namespace Orleans.StorageProvider.Blob.Tests
+﻿namespace Orleans.StorageProvider.Blob.NUnitTests
 {
     using System;
     using System.Diagnostics;
     using System.Threading.Tasks;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Runtime.Host;
     using Test.GrainInterfaces;
     using System.IO;
+    using NUnit.Framework;
 
-    [ TestClass ]
+    [ TestFixture ]
   public class UnitTest1
   {
-    [ TestMethod ]
+    [ Test ]
     public async Task TestGrains()
     {
       // insert your grain test code here
@@ -55,7 +55,7 @@
         throw new SystemException( string.Format( "Failed to start Orleans silo '{0}' as a {1} node.", siloHost.Name, siloHost.Type ) );
     }
 
-    [ ClassInitialize ]
+    [ OneTimeSetUp ]
     public static void GrainTestsClassInitialize( TestContext testContext )
     {
       hostDomain = AppDomain.CreateDomain( "OrleansHost", null, new AppDomainSetup {
@@ -66,7 +66,7 @@
       GrainClient.Initialize( "DevTestClientConfiguration.xml" );
     }
 
-    [ ClassCleanup ]
+    [ OneTimeTearDown ]
     public static void GrainTestsClassCleanUp()
     {
       hostDomain.DoCallBack( () => {
