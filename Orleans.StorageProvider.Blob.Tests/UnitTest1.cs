@@ -1,13 +1,14 @@
 ﻿namespace Orleans.StorageProvider.Blob.Tests
 {
-  using System;
-  using System.Diagnostics;
-  using System.Threading.Tasks;
-  using Microsoft.VisualStudio.TestTools.UnitTesting;
-  using Runtime.Host;
-  using Test.GrainInterfaces;
+    using System;
+    using System.Diagnostics;
+    using System.Threading.Tasks;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using Runtime.Host;
+    using Test.GrainInterfaces;
+    using System.IO;
 
-  [ TestClass ]
+    [ TestClass ]
   public class UnitTest1
   {
     [ TestMethod ]
@@ -34,6 +35,16 @@
 
     private static void InitSilo( string[] args )
     {
+      // this is a hack to replace the local azure storage emulator for a real storage account
+      // which is stored in an environment variable in travis ci
+      const string SILO_SETTINGS_FILE = "DevTestServerConfiguration.xml";
+      string connectionString = null;
+      if (null != (connectionString = Environment.GetEnvironmentVariable("DataConnectionString")))
+      {
+        var settings = File.ReadAllText(SILO_SETTINGS_FILE).Replace("UseDevelopmentStorage=true", connectionString);
+        File.WriteAllText(SILO_SETTINGS_FILE, settings);
+      }
+
       siloHost = new SiloHost( "Primary" ) {
         ConfigFileName = "DevTestServerConfiguration.xml",
         DeploymentId = "1"
