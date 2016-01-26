@@ -1,2 +1,8 @@
 language: csharp
-solution: BlobStorageProvider-Travis.sln
+solution: BlobStorageProvider.sln
+install:
+  - nuget restore BlobStorageProvider.sln
+  - nuget install NUnit.Runners -Version 2.6.4 -OutputDirectory testrunner
+script:
+  - xbuild /p:Configuration=Release BlobStorageProvider.sln
+  - mono ./testrunner/NUnit.Runners.2.6.4/tools/nunit-console.exe ./Orleans.StorageProvider.Blob.NUnitTests/bin/Release/Orleans.StorageProvider.Blob.NUnitTests.dll
