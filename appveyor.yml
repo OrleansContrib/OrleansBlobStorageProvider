@@ -1,2 +1,5 @@
 build:
   project: BlobStorageProvider.sln
+
+before_build:
+  - cmd: nuget restore BlobStorageProvider.sln
