@@ -41,6 +41,7 @@
       string connectionString = null;
       if (null != (connectionString = Environment.GetEnvironmentVariable("DataConnectionString")))
       {
+        Console.WriteLine("rewritten DataConnectinString variable");
         var settings = File.ReadAllText(SILO_SETTINGS_FILE).Replace("UseDevelopmentStorage=true", connectionString);
         File.WriteAllText(SILO_SETTINGS_FILE, settings);
       }
