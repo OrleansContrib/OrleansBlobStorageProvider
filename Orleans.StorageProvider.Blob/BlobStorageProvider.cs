@@ -1,17 +1,18 @@
 ﻿namespace Orleans.StorageProvider.Blob
 {
-  using System;
-  using System.Runtime.Serialization.Formatters;
-  using System.Text;
-  using System.Threading.Tasks;
-  using Microsoft.WindowsAzure.Storage;
-  using Microsoft.WindowsAzure.Storage.Blob;
-  using Newtonsoft.Json;
-  using Providers;
-  using Runtime;
-  using Storage;
+    using System;
+    using System.Runtime.Serialization.Formatters;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Microsoft.WindowsAzure.Storage;
+    using Microsoft.WindowsAzure.Storage.Blob;
+    using Microsoft.WindowsAzure.Storage.Blob.Protocol;
+    using Newtonsoft.Json;
+    using Providers;
+    using Runtime;
+    using Storage;
 
-  public class BlobStorageProvider : IStorageProvider
+    public class BlobStorageProvider : IStorageProvider
   {
     private JsonSerializerSettings settings;
 
@@ -116,13 +117,29 @@
         var blobName = GetBlobName( grainType, grainId );
         var blob = container.GetBlockBlobReference( blobName );
 
-        var exists = await blob.ExistsAsync();
-        if( !exists )
+        string text;
+
+        try
         {
-          return;
+
+          text = await blob.DownloadTextAsync();
+        }
+        catch ( StorageException exception )
+        {
+            var errorCode = exception.RequestInformation.ExtendedErrorInformation.ErrorCode;
+
+            if ( errorCode == BlobErrorCodeStrings.ContainerNotFound
+                        ||
+                    errorCode == BlobErrorCodeStrings.BlobNotFound )
+            {
+              return;
+            }
+            else
+            {
+              throw;
+            }
         }
 
-        var text = await blob.DownloadTextAsync();
         if( string.IsNullOrWhiteSpace( text ) )
         {
           return;
