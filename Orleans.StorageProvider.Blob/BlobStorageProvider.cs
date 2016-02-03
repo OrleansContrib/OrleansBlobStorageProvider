@@ -1,18 +1,18 @@
 ﻿namespace Orleans.StorageProvider.Blob
 {
-    using System;
-    using System.Runtime.Serialization.Formatters;
-    using System.Text;
-    using System.Threading.Tasks;
-    using Microsoft.WindowsAzure.Storage;
-    using Microsoft.WindowsAzure.Storage.Blob;
-    using Microsoft.WindowsAzure.Storage.Blob.Protocol;
-    using Newtonsoft.Json;
-    using Providers;
-    using Runtime;
-    using Storage;
+  using System;
+  using System.Runtime.Serialization.Formatters;
+  using System.Text;
+  using System.Threading.Tasks;
+  using Microsoft.WindowsAzure.Storage;
+  using Microsoft.WindowsAzure.Storage.Blob;
+  using Microsoft.WindowsAzure.Storage.Blob.Protocol;
+  using Newtonsoft.Json;
+  using Providers;
+  using Runtime;
+  using Storage;
 
-    public class BlobStorageProvider : IStorageProvider
+  public class BlobStorageProvider : IStorageProvider
   {
     private JsonSerializerSettings settings;
 
