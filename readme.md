@@ -23,11 +23,11 @@ Then register the provider in your Silo Configuration:
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
 <OrleansConfiguration xmlns="urn:orleans">
-  <Globals>
-    <StorageProviders>
-      <Provider Type="Orleans.StorageProvider.Blob.BlobStorageProvider" Name="BlobStore" DataConnectionString="UseDevelopmentStorage=true" ContainerName="grainstate"/>
-    </StorageProviders>
-    ...
+    <Globals>
+        <StorageProviders>
+            <Provider Type="Orleans.StorageProvider.Blob.BlobStorageProvider" Name="BlobStore" DataConnectionString="UseDevelopmentStorage=true" ContainerName="grainstate"/>
+        </StorageProviders>
+        ...
 ```
 
 Optional Attributes that can be added to the provider element
@@ -39,19 +39,19 @@ Then from your grain code configure grain storage:
 // define a state interface
 public interface IMyGrainState : IGrainState
 {
-    string Value { get; set; }
+        string Value { get; set; }
 }
 
 // Select the BlobStore as the storage provider for the grain
 [StorageProvider(ProviderName="BlobStore")]
 public class Grain1 : Orleans.Grain<IMyGrainState>, IGrain1
 {
-    public Task Test(string value)
-    {
-    	// set the state and save it
-        this.State.Value = value;
-        return this.State.WriteStateAsync();
-    }
+        public Task Test(string value)
+        {
+        	// set the state and save it
+                this.State.Value = value;
+                return this.State.WriteStateAsync();
+        }
 
 }
 ```
