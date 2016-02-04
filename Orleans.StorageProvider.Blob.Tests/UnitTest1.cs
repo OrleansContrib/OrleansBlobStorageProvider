@@ -53,7 +53,7 @@
             siloHost.InitializeOrleansSilo();
             var ok = siloHost.StartOrleansSilo();
             if (!ok)
-                throw new SystemException(string.Format("Failed to start Orleans silo '{0}' as a {1} node.", siloHost.Name, siloHost.Type));
+                throw new SystemException($"Failed to start Orleans silo '{siloHost.Name}' as a {siloHost.Type} node.");
         }
 
         [ClassInitialize]

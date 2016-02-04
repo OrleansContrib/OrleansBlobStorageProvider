@@ -120,7 +120,6 @@
 
                 try
                 {
-
                     text = await blob.DownloadTextAsync();
                 }
                 catch (StorageException exception)
@@ -166,8 +165,7 @@
 
                 var blob = container.GetBlockBlobReference(blobName);
                 blob.Properties.ContentType = "application/json";
-                await
-                    blob.UploadTextAsync(
+                await blob.UploadTextAsync(
                         storedData,
                         Encoding.UTF8,
                         AccessCondition.GenerateIfMatchCondition(grainState.Etag),
