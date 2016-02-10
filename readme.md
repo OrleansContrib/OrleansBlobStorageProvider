@@ -1,3 +1,19 @@
+# Deprecation Notice
+
+The OrleansBlobStorageProvider has been [merged](https://github.com/dotnet/orleans/pull/1376) into the Orleans codebase.
+
+The next release of Orleans will contain this provider by default, and can be used as follows:
+
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<OrleansConfiguration xmlns="urn:orleans">
+    <Globals>
+        <StorageProviders>
+            <Provider Type="Orleans.Storage.AzureBlobStorage" Name="BlobStore" DataConnectionString="UseDevelopmentStorage=true" ContainerName="grainstate"/>
+        </StorageProviders>
+        ...
+```
+
 [![Build Status](https://travis-ci.org/OrleansContrib/OrleansBlobStorageProvider.svg?branch=master)](https://travis-ci.org/OrleansContrib/OrleansBlobStorageProvider) [![Build status](https://ci.appveyor.com/api/projects/status/bk4x15jb2cge3vsj?svg=true)](https://ci.appveyor.com/project/richorama/orleansblobstorageprovider)
 
 # Orleans Blob Storage Provider
