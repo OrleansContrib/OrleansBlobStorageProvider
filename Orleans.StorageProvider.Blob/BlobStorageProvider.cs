@@ -146,6 +146,7 @@
             catch(Exception ex)
             {
                 Log.Error(0, ex.ToString());
+                throw;
             }
         }
 
@@ -176,6 +177,7 @@
             catch(Exception ex)
             {
                 Log.Error(0, ex.ToString());
+                throw;
             }
         }
 
@@ -195,6 +197,7 @@
             catch(Exception ex)
             {
                 Log.Error(0, ex.ToString());
+                throw;
             }
         }
     }
